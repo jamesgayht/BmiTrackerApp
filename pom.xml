@@ -14,7 +14,7 @@
 	<name>BmiTrackerApp</name>
 	<description>BMI Tracker App using Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
