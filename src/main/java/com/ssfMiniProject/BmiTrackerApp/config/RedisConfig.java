@@ -12,53 +12,53 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import com.ssfMiniProject.BmiTrackerApp.models.User;
 
 @Configuration
 public class RedisConfig {
-    
     private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
-    //define your redis information in application.properties
+    // define your redis information in application.properties
 
-    //inject the values into the class
+    // inject the values into the class
     @Value("${spring.redis.host}")
-    private String redisHost; 
+    private String redisHost;
 
     @Value("${spring.redis.port}")
-    private Optional<Integer> redisPort; 
+    private Optional<Integer> redisPort;
 
     @Value("${spring.redis.password}")
-    private String redisPassword; 
+    private String redisPassword;
 
-    //create a method that returns an instance of redis method
-    @Bean
+    @Bean(name = "userRedisConfig")
     @Scope("singleton")
-    public RedisTemplate<String, Object> redisTemplate() {
-        final RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration();
-        redisStandaloneConfiguration.setHostName(redisHost);
-        redisStandaloneConfiguration.setPort(redisPort.get());
-        redisStandaloneConfiguration.setPassword(redisPassword);
+    public RedisTemplate<String, User> redisTemplate() {
 
-        //use the jedis driver to build the confirguration
-        final JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder().build(); 
-        final JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory(redisStandaloneConfiguration, jedisClientConfiguration); 
-        jedisConnectionFactory.afterPropertiesSet();
+        //set up the configuration --> RedisStandaloneConfiguration 
+        final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName(redisHost);
+
+        //for optional integer
+        config.setPort(redisPort.get());
+        config.setPassword(redisPassword);
         
-        //string interpolate the variable for checking 
+        //Creates the client and factory
+        final JedisClientConfiguration jedisClient = JedisClientConfiguration.builder().build();
+        final JedisConnectionFactory jedisFac = new JedisConnectionFactory(config, jedisClient);
+        jedisFac.afterPropertiesSet();
         logger.info("redis host port > {redisHost} {redisPort}", redisHost, redisPort);
+        
+        //Creates the template
+        RedisTemplate<String, User> template = new RedisTemplate<String, User>();
+        template.setConnectionFactory(jedisFac);
 
-        //lastly instantiate the redis template 
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>(); 
-        //set the factory in, key initializers, so that whenver we create a record the key values is recognized in the redis database
-        redisTemplate.setConnectionFactory(jedisConnectionFactory);
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-
-        //create a custom serializer that is able to store any type
-        RedisSerializer<Object> redisSerializer = new JdkSerializationRedisSerializer(getClass().getClassLoader()); 
-        redisTemplate.setValueSerializer(redisSerializer);
-        return redisTemplate; 
+        //The serializers
+        template.setKeySerializer(new StringRedisSerializer());
+        Jackson2JsonRedisSerializer jackson2JsonJsonSerializer = new Jackson2JsonRedisSerializer(User.class);
+        template.setValueSerializer(jackson2JsonJsonSerializer);
+        return template;
     }
 }
