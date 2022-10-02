@@ -129,13 +129,14 @@ public class GeneratorController {
         return "main";
     }
 
+    // need to check 021022
     @GetMapping("/cancel")
     public String cancel(@ModelAttribute DayObj dayObj, Model model) {
         dayObj.setDay(currDay);
         logger.info("cancel day > " + dayObj.day);
 
         model.addAttribute("currUser", currUser);
-        // model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
+        model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
         model.addAttribute("dayObj", dayObj);
 
         return "main";
