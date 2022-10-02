@@ -32,7 +32,7 @@
     <div class="container mt-4 ">
         
         <div class="card col bg-light m-3 py-3 px-5">
-            
+
              <div class="text-center">
                 <img 
                 src="https://lh3.googleusercontent.com/BgpmBNhM1pmn8UuT6GISRNHdo5dHj79SSEE_mywST5eGzQb7yRn6eKRiAnqUDXPA3Qo_KJrUcppLIiz2nQCBG5S4b1_uh2DK9c0XBnOxLuJMUJwRBMylsO__lr9Smz7etJocJMUE=w2400"
@@ -52,7 +52,7 @@
 
                 <div class="row justify-content-between mb-3 align-items-end">
                     <div class="col" th:object="${dayObj}">
-                            <label class="form-label p-1 fs-5" for="date">Date</label>
+                            <label class="form-label p-1 fs-5" for="date">Select Date:</label>
                             <input type="date" class="form-control" id="date" autocomplete="off" th:field="*{day}" required/> 
                     </div>
                 </div>
@@ -99,7 +99,7 @@
         <!-- List of recorded days -->
 
         <div class="card-header d-flex flex-wrap m-3 justify-content-evenly" th:object="${currUser}" >
-            <div th:each=" entry : *{dayMap}">
+            <div th:each="entry : *{dayMap}">
                 <a th:href="@{'/selectDay/'+${entry.key}}" class="mb-3 me-2 card text-decoration-none" >
                     <button class="btn btn-light p-3" type="button" th:text="${entry.key}"></button>
                 </a>

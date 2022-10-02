@@ -33,7 +33,7 @@
         </nav>
 
         <div class="text-center">
-            <img src="https://lh3.googleusercontent.com/BgpmBNhM1pmn8UuT6GISRNHdo5dHj79SSEE_mywST5eGzQb7yRn6eKRiAnqUDXPA3Qo_KJrUcppLIiz2nQCBG5S4b1_uh2DK9c0XBnOxLuJMUJwRBMylsO__lr9Smz7etJocJMUE=w2400"
+            <img src="https://lh3.googleusercontent.com/aa-_PDP0dwD9_hI7ozCdvTGmSNWpmkxQ6qRhauXh043rSqOUaF5BjBYfduVEU7OgX7BZ3UHL4Ns9gGh12VHugHksy-lkHy6Wn0CoVzi0zrvB1p4SIrHChXHFwsifOmF_eFFFrIm8=w2400"
                 class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3" width="200px" alt="profile"
                 referrerpolicy="no-referrer">
         </div>
@@ -44,7 +44,7 @@
                     <h4>Your Generated BMI:</h4>
                 </div>
 
-                <div class="col-lg-4 col-md-6; text-center" th:each="bmiData, stat :*{bmiList}">
+                <div class="align-items-center" th:each="bmiData, stat :*{bmiList}">
                     <div class="card my-2;">
                         <div class="card-header d-flex justify-content-between">
 
@@ -55,7 +55,7 @@
                         </div>
                         <div class="card-header d-flex justify-content-between">
 
-                            <label class="form-label fs-5 text-capitalize text-center" th:for="${bmiData.userWeight}"
+                            <label class="form-label fs-5 text-capitalize" th:for="${bmiData.userWeight}"
                                 th:text="'Weight: ' + ${bmiData.userWeight}"></label>
                             <input type="hidden" th:field="*{bmiList[__${stat.index}__].userWeight}">
 
@@ -63,7 +63,7 @@
                         <div class="card-header d-flex justify-content-between">
 
 
-                            <label class="form-label fs-5 text-capitalize text-center" th:for="${bmiData.userHeight}"
+                            <label class="form-label fs-5 text-capitalize" th:for="${bmiData.userHeight}"
                                 th:text="'Height: ' + ${bmiData.userHeight}"></label>
                             <input type="hidden" th:field="*{bmiList[__${stat.index}__].userHeight}">
 
@@ -85,10 +85,6 @@
             </div>
         </div>
     </form>
-
-
-
-
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>

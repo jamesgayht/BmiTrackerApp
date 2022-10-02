@@ -65,10 +65,6 @@ public class User {
         }
         return dayMap.get(day).getDailyBmi();
     }
-
-    // public void delBmi(String day, int i) {
-    //     dayMap.get(day).getDailyBmi().delBmi(i);
-    // }
     
     public void delBmiFromListObj(String day, GeneratedBmiObj generatedBmiObj) {
         if (getDayMap().containsKey(day)) {
