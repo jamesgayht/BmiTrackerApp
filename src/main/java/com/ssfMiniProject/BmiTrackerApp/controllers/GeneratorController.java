@@ -61,9 +61,11 @@ public class GeneratorController {
         }
         if (currUser.getDayMap().containsKey(dayObj.day)) {
             currGeneratedBmiObj = currUser.getDayMap().get(dayObj.day).getDailyBmi();
+            model.addAttribute("generatedBmiIsPresent", "true");
             model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
         } else {
             model.addAttribute("generatedBmiObj", "emptyList");
+            model.addAttribute("generatedBmiIsPresent", "false");
         }
         dayObj.setDailyBmi(currGeneratedBmiObj);
         currDay = dayObj.day;
@@ -180,10 +182,8 @@ public class GeneratorController {
 
         User currUser = redisService.getByUsername(username).get();
 
-        //review this 290922
         currUser.delDay(day);
-        // --> using this makes the entire bmi list go away
-        currUser.delBmiFromListObj(day, generatedBmiObj);
+        // currUser.delBmiFromListObj(day, generatedBmiObj);
         // get the list of dates from user object 
         // logger.info(currUser);
 

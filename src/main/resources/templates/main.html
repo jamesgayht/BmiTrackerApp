@@ -69,13 +69,16 @@
 
 
          <!-- BMI of Selected Day -->
-        <form action="#" th:action="@{'/edit/' + ${currUser.username} + '/' + ${dayObj.day}}" method="post" th:object="${generatedBmiObj}">
-            <div class="m-3 card" th:if="${generatedBmiObj!='emptyList'}"   >
+        <form action="#" th:action="@{'/edit/' + ${currUser.username} + '/' + ${dayObj.day}}" method="post" 
+        th:object="${generatedBmiObj}"
+        th:switch="${generatedBmiIsPresent}">
+            <div class="m-3 card" th:case="${'true'}">
                 <div class="card-header d-flex justify-content-between" >
                     <p class="form-label fs-5 text-capitalize mx-3 mt-1" th:text="'Date: ' + ${dayObj.day}"></p>
                     <div class="d-flex align-items-center">
                         <button class="btn btn-secondary mx-3" type="submit">Edit</button>
                     </div>
+                    <div th:case="${'false'}"></div>
                 </div>
 
                 <div class="card-body">
@@ -100,7 +103,8 @@
 
         <div class="card-header d-flex flex-wrap m-3 justify-content-evenly" th:object="${currUser}" >
             <div th:each="entry : *{dayMap}">
-                <a th:href="@{'/selectDay/'+${entry.key}}" class="mb-3 me-2 card text-decoration-none" >
+                <a th:href="@{'/selectDay/' + ${currUser.username} + '/' + ${entry.key}}"
+                class="mb-3 me-2 card text-decoration-none">
                     <button class="btn btn-light p-3" type="button" th:text="${entry.key}"></button>
                 </a>
             </div>
