@@ -2,6 +2,7 @@ package com.ssfMiniProject.BmiTrackerApp.models;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.springframework.stereotype.Component;
 
@@ -10,7 +11,15 @@ public class User {
 
     private String username;
     private String password;
-    Map<String, DayObj> dayMap = new HashMap<>();
+    TreeMap<String, DayObj> dayMap = new TreeMap<>();
+
+    public void setDayMap(TreeMap<String, DayObj> dayMap) {
+        this.dayMap = dayMap;
+    }
+
+    public TreeMap<String, DayObj> getDayMap() {
+        return dayMap;
+    }
 
     public String getUsername() {
         return username;
@@ -28,14 +37,6 @@ public class User {
         this.password = password;
     }
 
-    public Map<String, DayObj> getDayMap() {
-        return dayMap;
-    }
-
-    public void setDayMap(Map<String, DayObj> dayMap) {
-        this.dayMap = dayMap;
-    }
-
     public void addDay(DayObj dayObj) {
         dayMap.put(dayObj.day, dayObj);
     }
@@ -44,8 +45,8 @@ public class User {
         dayMap.remove(day);
     }
 
-    public void addBmi(String day, BmiData bmiData){ 
-        if (dayMap.containsKey(day)){
+    public void addBmi(String day, BmiData bmiData) {
+        if (dayMap.containsKey(day)) {
             dayMap.get(day).getDailyBmi().addBmi(bmiData);
         } else {
             DayObj dayObj = new DayObj();
@@ -56,7 +57,7 @@ public class User {
         }
     }
 
-    public GeneratedBmiObj getBmiObj (String day) {
+    public GeneratedBmiObj getBmiObj(String day) {
         if (!dayMap.containsKey(day)) {
             DayObj dayObj = new DayObj();
             GeneratedBmiObj generatedBmiObj = new GeneratedBmiObj();
@@ -65,7 +66,7 @@ public class User {
         }
         return dayMap.get(day).getDailyBmi();
     }
-    
+
     public void delBmiFromListObj(String day, GeneratedBmiObj generatedBmiObj) {
         if (getDayMap().containsKey(day)) {
             delDay(day);

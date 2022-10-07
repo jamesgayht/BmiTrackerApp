@@ -159,21 +159,21 @@ public class GeneratorController {
         return "main";
     }
 
-    @PostMapping("/edit/{username}/{day}")
-    public String edit(@PathVariable(name = "username", required = true) String username,
-            @PathVariable(required = true) String day, Model model) {
+    // @PostMapping("/edit/{username}/{day}")
+    // public String edit(@PathVariable(name = "username", required = true) String username,
+    //         @PathVariable(required = true) String day, Model model) {
 
-        User currUser = redisService.getByUsername(username).get();
-        GeneratedBmiObj currGeneratedBmiObj = currUser.getBmiObj(day);
-        DayObj dayObj = new DayObj(day);
-        logger.info("edit > " + username + " day > " + day);
+    //     User currUser = redisService.getByUsername(username).get();
+    //     GeneratedBmiObj currGeneratedBmiObj = currUser.getBmiObj(day);
+    //     DayObj dayObj = new DayObj(day);
+    //     logger.info("edit > " + username + " day > " + day);
 
-        model.addAttribute("currUser", currUser);
-        model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
-        model.addAttribute("dayObj", dayObj);
+    //     model.addAttribute("currUser", currUser);
+    //     model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
+    //     model.addAttribute("dayObj", dayObj);
 
-        return "edit";
-    }
+    //     return "edit";
+    // }
 
     @PostMapping(value = "/del/{username}/{day}", params = "delete")
     public String deleteAll(@PathVariable(name = "username", required = true) String username,

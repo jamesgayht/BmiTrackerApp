@@ -13,7 +13,7 @@ public class DayObj {
     
     public DayObj(){
         LocalDate localDate = LocalDate.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         this.day = localDate.format(dateTimeFormatter);
     }
 
@@ -39,7 +39,7 @@ public class DayObj {
     
     public void newDay(){
         LocalDate localDate = LocalDate.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-uuuu");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         this.day = localDate.format(dateTimeFormatter);
     }
 }
