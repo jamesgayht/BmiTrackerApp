@@ -1,7 +1,5 @@
 package com.ssfMiniProject.BmiTrackerApp.models;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 import org.springframework.stereotype.Component;

@@ -131,7 +131,6 @@ public class GeneratorController {
         return "main";
     }
 
-    // need to check 021022
     @GetMapping("/cancel")
     public String cancel(@ModelAttribute DayObj dayObj, Model model) {
         dayObj.setDay(currDay);
@@ -144,14 +143,11 @@ public class GeneratorController {
         return "main";
     }
 
-    @GetMapping("/selectDay/{date}")
-    public String selectDay(@PathVariable(name = "date", required = true) String date,
-            @ModelAttribute DayObj dayObj, Model model) {
+    @GetMapping("/home")
+    public String home (@ModelAttribute DayObj dayObj, Model model) {
+        dayObj.setDay(currDay);
+        logger.info("cancel day > " + dayObj.day);
 
-        currGeneratedBmiObj = currUser.getDayMap().get(date).getDailyBmi();
-        dayObj.setDay(date);
-        currDay = dayObj.day;
-        logger.info("in selectDay > " + dayObj.day);
         model.addAttribute("currUser", currUser);
         model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
         model.addAttribute("dayObj", dayObj);
@@ -159,21 +155,6 @@ public class GeneratorController {
         return "main";
     }
 
-    // @PostMapping("/edit/{username}/{day}")
-    // public String edit(@PathVariable(name = "username", required = true) String username,
-    //         @PathVariable(required = true) String day, Model model) {
-
-    //     User currUser = redisService.getByUsername(username).get();
-    //     GeneratedBmiObj currGeneratedBmiObj = currUser.getBmiObj(day);
-    //     DayObj dayObj = new DayObj(day);
-    //     logger.info("edit > " + username + " day > " + day);
-
-    //     model.addAttribute("currUser", currUser);
-    //     model.addAttribute("generatedBmiObj", currGeneratedBmiObj);
-    //     model.addAttribute("dayObj", dayObj);
-
-    //     return "edit";
-    // }
 
     @PostMapping(value = "/del/{username}/{day}", params = "delete")
     public String deleteAll(@PathVariable(name = "username", required = true) String username,
@@ -183,9 +164,6 @@ public class GeneratorController {
         User currUser = redisService.getByUsername(username).get();
 
         currUser.delDay(day);
-        // currUser.delBmiFromListObj(day, generatedBmiObj);
-        // get the list of dates from user object 
-        // logger.info(currUser);
 
         redisService.save(currUser);
         logger.info("deleted > " + username + " day >" + day);

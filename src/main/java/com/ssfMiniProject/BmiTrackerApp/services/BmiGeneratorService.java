@@ -19,7 +19,6 @@ public class BmiGeneratorService {
 
     private static final Logger logger = LoggerFactory.getLogger(BmiGeneratorService.class);
 
-    // String apiKey = "a0bde9d50dmsh39a261972415d2dp1ddf80jsn13b950dd7ead";
     String apiKey = "99c81562dfmshf956b1399965e0dp14a8ecjsn9c1161f47025";
     private static final String URL = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric";
 
