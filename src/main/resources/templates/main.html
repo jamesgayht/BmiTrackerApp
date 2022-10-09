@@ -52,12 +52,12 @@
 
             <form action="#" th:action="@{'/showBmi/' + ${currUser.username}}" method="post">
                 <label for="queryWeight" class="form-label fs-5 p-1">Enter Weight:</label>
-                <input class="form-control mb-3" type="text" th:name="queryWeight" placeholder="Weight in kg"
+                <input class="form-control mb-3" type="number" step=".01" th:name="queryWeight" placeholder="Weight in kg"
                     required />
 
                 <form action="#" th:action="@{'/showBmi/' + ${currUser.username}}" method="post">
                     <label for="queryHeight" class="form-label fs-5 p-1">Enter Height:</label>
-                    <input class="form-control mb-3" type="text" th:name="queryHeight" placeholder="Height in meters"
+                    <input class="form-control mb-3" type="number" step=".01" th:name="queryHeight" placeholder="Height in meters"
                         required />
 
 
