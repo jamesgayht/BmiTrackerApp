@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,7 +20,11 @@ public class BmiGeneratorService {
 
     private static final Logger logger = LoggerFactory.getLogger(BmiGeneratorService.class);
 
-    String apiKey = System.getenv("BMI_API_KEY");
+    @Value ("${BMI_API_KEY}")
+    String apiKey;
+
+    // String apiKey = System.getenv("BMI_API_KEY");
+
     private static final String URL = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric";
     
     public Optional<GeneratedBmiObj> getGeneratedBmi (String weight, String height) {
