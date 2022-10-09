@@ -19,17 +19,18 @@ public class BmiGeneratorService {
 
     private static final Logger logger = LoggerFactory.getLogger(BmiGeneratorService.class);
 
-    String apiKey = "99c81562dfmshf956b1399965e0dp14a8ecjsn9c1161f47025";
+    String apiKey = System.getenv("BMI_API_KEY");
     private static final String URL = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric";
-
+    
     public Optional<GeneratedBmiObj> getGeneratedBmi (String weight, String height) {
-
+        
+        logger.info("APIKEY > " + apiKey);
         String requestUrl = UriComponentsBuilder.fromUriString(URL)
                             .queryParam("weight", weight)
                             .queryParam("height", height)
                             .toUriString();
 
-        logger.info(requestUrl);
+        logger.info("Request URL > " + requestUrl);
         RestTemplate template = new RestTemplate();
         ResponseEntity<String> resp = null;
 

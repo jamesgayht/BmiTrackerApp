@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,4 +56,35 @@
 
 </body>
 </html>
+ -->
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Tracker</title>
+  <link rel="stylesheet" href="https://res.cloudinary.com/domhs7ghe/raw/upload/v1665301045/index_stz5dj.css"
+    type="text/css">
+</head>
+
+<div class="header">
+
+  <!-- VIDEO LOOP BG -->
+  <video autoplay loop class="back-video" muted plays-inline>
+    <source src="https://res.cloudinary.com/domhs7ghe/video/upload/v1665253018/SkeleScan_isc9g2.mp4" type="video/mp4">
+  </video>
+
+  <!-- WELCOME TEXT -->
+  <div class="content">
+    <h1> Welcome to your <br> BMI Tracker! </h1>
+
+    <!-- USERNAME FORM -->
+    <form action="#" th:action="@{/login}" method="post">
+      <input type="text" placeholder="&#x270e; Username" th:name="username" required>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+</html>
