@@ -20,10 +20,7 @@ public class BmiGeneratorService {
 
     private static final Logger logger = LoggerFactory.getLogger(BmiGeneratorService.class);
 
-    @Value ("${BMI_API_KEY}")
-    String apiKey;
-
-    // String apiKey = System.getenv("BMI_API_KEY");
+    String apiKey = System.getenv("BMI_API_KEY");
 
     private static final String URL = "https://body-mass-index-bmi-calculator.p.rapidapi.com/metric";
     
